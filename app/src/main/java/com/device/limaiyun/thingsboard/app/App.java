@@ -67,6 +67,7 @@ public class App extends Application {
         Constant.API_SERVE_URL = properties.getProperty(Constant.SERVER_URL_STR);
         Constant.API_AUTH_LOGIN = properties.getProperty(Constant.LOGIN_URL);
         Constant.API_DEVICE_TYPE = properties.getProperty(Constant.DEVICE_TYPE);
+        Constant.API_DEVICE_TYPES = properties.getProperty(Constant.DEVICE_YEPES);
         Constant.API_CUSTOMER = properties.getProperty(Constant.CUSTOMER);
         Constant.API_CUSTOMER_DEVICES = properties.getProperty(Constant.CUSTOMER_DEVICES);
         Constant.API_TENANT_DASHBOARDS = properties.getProperty(Constant.TENANT_DASHBOARDS);

@@ -47,11 +47,15 @@ public class Constant {
 
     public static final String YS_VIDEO_LIST="API_YS_VIDEO_LIST";
 
+    public static final String DEVICE_YEPES="API_DEVICE_TYPES";
+
     public static String API_SERVE_URL = "";
 
     public static String API_AUTH_LOGIN = "";
 
     public static String API_DEVICE_TYPE = "";
+
+    public static String API_DEVICE_TYPES="";
 
     public static String API_CUSTOMER = "";
 

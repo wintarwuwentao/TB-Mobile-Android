@@ -49,8 +49,8 @@ public class SupervisionTaskDivisionActivity extends BaseActivity implements Sup
     private SupervisionTaskDivisionPresenter presenter;
     private List<String> mTitleLists;
     private CommonNavigator mCommonNavigator;
-    private List<Fragment> mViewLists;
-    private SupervisionFragment fragment;
+//    private List<Fragment> mViewLists;
+//    private SupervisionFragment fragment;
     private String wekan_token;
     private String board_id;
     private String user_id;
@@ -100,7 +100,7 @@ public class SupervisionTaskDivisionActivity extends BaseActivity implements Sup
     @Override
     public void showPageIndictor(final List<WeKanTitleBean> weKanTitleBeans,String url) {
         mTitleLists = new ArrayList<>();
-        mViewLists = new ArrayList<>();
+//        mViewLists = new ArrayList<>();
         for (int i = 0; i < weKanTitleBeans.size(); i++) {
             mTitleLists.add(weKanTitleBeans.get(i).getTitle());
         }
@@ -137,12 +137,7 @@ public class SupervisionTaskDivisionActivity extends BaseActivity implements Sup
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
                 indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-//                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-//                indicator.setStartInterpolator(new AccelerateInterpolator());
-//                indicator.setEndInterpolator(new DecelerateInterpolator(1.6f));
-////                indicator.setYOffset(UIUtil.dip2px(context, 39));
                 indicator.setLineHeight(UIUtil.dip2px(context, 2));
-//                    indicator.setLineWidth(UIUtil.dip2px(context,15));
                 indicator.setColors(Color.parseColor("#3783D2"));
                 return indicator;
             }

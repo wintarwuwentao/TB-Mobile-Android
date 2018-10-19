@@ -7,4 +7,5 @@ package com.device.limaiyun.thingsboard.ui.activity.childactivity.equipment.mode
  */
 
 public interface EquipmentPort {
+    void getDeviceTypes(String url,EquipmentListener listener);
 }

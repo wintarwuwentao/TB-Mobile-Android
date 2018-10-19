@@ -9,20 +9,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.device.limaiyun.thingsboard.R;
 import com.device.limaiyun.thingsboard.base.BaseActivity;
+import com.device.limaiyun.thingsboard.bean.DeviceTypesBean;
+import com.device.limaiyun.thingsboard.ui.activity.childactivity.equipment.presenter.EquipmentPresenter;
 import com.device.limaiyun.thingsboard.ui.fragment.child.all.view.AllFragment;
-import com.device.limaiyun.thingsboard.ui.fragment.child.frock.view.FrockFragment;
-import com.device.limaiyun.thingsboard.ui.fragment.child.gateway.view.GateFragment;
-import com.device.limaiyun.thingsboard.ui.fragment.child.injection_molad_machine.view.InjectionMoladFragment;
 import com.device.limaiyun.thingsboard.utils.ScaleTransitionPagerTitleView;
 import com.device.limaiyun.thingsboard.utils.ToastUtils;
-
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -57,11 +53,7 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
 
     private CommonNavigator mCommonNavigator;
     private List<String> mTitleLists;
-    private List<Fragment> mViewLists;
-    private AllFragment allFragment;
-    private GateFragment gateFragment;
-    private InjectionMoladFragment injectionMoladFragment;
-    private FrockFragment frockFragment;
+    private EquipmentPresenter presenter;
 
 
     @Override
@@ -72,6 +64,7 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
     @Override
     public void initView() {
         mCommonNavigator = new CommonNavigator(this);
+        presenter = new EquipmentPresenter(this);
     }
 
     @Override
@@ -82,27 +75,36 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
 
     @Override
     public void initData() {
-        mTitleLists = new ArrayList<>();
-        mTitleLists.add("全部");
-        mTitleLists.add("网关");
-        mTitleLists.add("工装");
-        mTitleLists.add("注塑机");
-
-        mViewLists = new ArrayList<>();
-
-        allFragment = new AllFragment();
-        gateFragment = new GateFragment();
-        injectionMoladFragment = new InjectionMoladFragment();
-        frockFragment = new FrockFragment();
-        mViewLists.add(allFragment);
-        mViewLists.add(gateFragment);
-        mViewLists.add(frockFragment);
-        mViewLists.add(injectionMoladFragment);
-
+        presenter.getDeviceTypes();
     }
 
     @Override
     public void initEvent() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hinddenLoading() {
+
+    }
+
+    @Override
+    public void showDeviceTypesTitle(List<DeviceTypesBean> deviceTypesBean) {
+        mTitleLists = new ArrayList<>();
+        mTitleLists.add("全部");
+        for (int i = 0; i < deviceTypesBean.size(); i++) {
+            mTitleLists.add(deviceTypesBean.get(i).getType());
+        }
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         mCommonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -121,7 +123,6 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
                 titleView.setSelectedColor(Color.parseColor("#3783D2"));
                 titleView.setSelected(true);
                 titleView.setTextSize(18.0f);
-
                 titleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -134,13 +135,8 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-//                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-                indicator.setStartInterpolator(new AccelerateInterpolator());
-                indicator.setEndInterpolator(new DecelerateInterpolator(1.6f));
-//                indicator.setYOffset(UIUtil.dip2px(context, 39));
+                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
                 indicator.setLineHeight(UIUtil.dip2px(context, 2));
-                indicator.setLineWidth(UIUtil.dip2px(context, 15));
                 indicator.setColors(Color.parseColor("#3783D2"));
                 return indicator;
             }
@@ -148,21 +144,6 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
         magicIndicator.setNavigator(mCommonNavigator);
         //设置viewpage页面发生改变,指示器发生改变
         ViewPagerHelper.bind(magicIndicator, viewPager);
-    }
-
-    @Override
-    public void showToast(String msg) {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hinddenLoading() {
-
     }
 
     private class MyViewPagerAdapter extends FragmentPagerAdapter {
@@ -173,16 +154,7 @@ public class EquipmentActivity extends BaseActivity implements EquipmentView {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return new AllFragment();
-            } else if (position == 1) {
-                return new GateFragment();
-            } else if (position == 2) {
-                return new FrockFragment();
-            }else if (position == 3){
-                return new InjectionMoladFragment();
-            }
-            return null;
+            return new AllFragment();
         }
 
         @Override
