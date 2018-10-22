@@ -1,11 +1,9 @@
 package com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.linechart.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,9 +24,6 @@ import com.device.limaiyun.thingsboard.R;
 import com.device.limaiyun.thingsboard.base.BaseActivity;
 import com.device.limaiyun.thingsboard.utils.env.Constant;
 
-import java.util.List;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import ren.yale.android.cachewebviewlib.WebViewCacheInterceptorInst;
@@ -37,13 +32,13 @@ import ren.yale.android.cachewebviewlib.WebViewCacheInterceptorInst;
  * Created by Administrator on 2018/7/3 0003.
  */
 
-public class LineChartActivity extends BaseActivity implements LineChartView {
+public class LineChartActivity extends BaseActivity {
 
     private Context mContext;
     @BindView(R.id.tv_line_chart_title)
     TextView tv_title;
     //    private LineChartPresenter presenter;
-    private String entityId;
+//    private String entityId;
     @BindView(R.id.ll_back)
     LinearLayout ll_back;
     //    @BindView(R.id.listview_etc)
@@ -71,14 +66,14 @@ public class LineChartActivity extends BaseActivity implements LineChartView {
         SharedPreferences sp = getSharedPreferences("account", MODE_PRIVATE);
         username = sp.getString("username", "");
         password = sp.getString("password", "");
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        String name = bundle.getString("name");
-        entityId = bundle.getString("entityId");
-        Log.e("entityId", entityId);
-        if (name != null) {
-            tv_title.setText(name);
-        }
+//        Intent intent = getIntent();
+//        Bundle bundle = intent.getExtras();
+//        String name = bundle.getString("name");
+//        entityId = bundle.getString("entityId");
+//        Log.e("entityId", entityId);
+//        if (name != null) {
+//            tv_title.setText(name);
+//        }
         mContext = this;
     }
 
@@ -116,7 +111,8 @@ public class LineChartActivity extends BaseActivity implements LineChartView {
                 if (url.equals(Constant.API_SERVE_URL + "/") && linechart_webview != null) {
                     loginWebView(view, username, password);//模拟webview登录
                 } else if (url.contains(Constant.API_HOME)) {
-                    linechart_webview.loadUrl(Constant.API_SERVE_URL + Constant.API_DASHBOARD);
+                    if (linechart_webview != null)
+                        linechart_webview.loadUrl(Constant.API_SERVE_URL + Constant.API_DASHBOARD);
                 }
             }
 
@@ -226,74 +222,74 @@ public class LineChartActivity extends BaseActivity implements LineChartView {
         }
     }
 
-    @Override
-    public void showToast(String msg) {
+//    @Override
+//    public void showToast(String msg) {
+//
+//    }
+//
+//    @Override
+//    public void showLoading() {
+//
+//    }
+//
+//    @Override
+//    public void hinddenLoading() {
+//
+//    }
+//
+//    @Override
+//    public void showEtcLinChart(final List<String> title, final List<List<Map<Long, String>>> data) {
+//        if (title != null) {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+////                    etcAdapter = new LineEtcAdapter(mContext,title,data);
+////                    listview_etc.setAdapter(etcAdapter);
+//                }
+//            });
+//        }
+//    }
+//
+//    @Override
+//    public void showCountLinChart(final List<String> title, final List<List<Map<Long, String>>> list) {
+//        if (list != null) {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+////                    etcAdapter = new LineEtcAdapter(mContext, title, list);
+////                    listview_count.setAdapter(etcAdapter);
+//                }
+//            });
+//        }
+//    }
+//
+//    @Override
+//    public void showEmpty() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+////                tv_empty.setVisibility(View.VISIBLE);
+//            }
+//        });
+//    }
 
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hinddenLoading() {
-
-    }
-
-    @Override
-    public void showEtcLinChart(final List<String> title, final List<List<Map<Long, String>>> data) {
-        if (title != null) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-//                    etcAdapter = new LineEtcAdapter(mContext,title,data);
-//                    listview_etc.setAdapter(etcAdapter);
-                }
-            });
-        }
-    }
-
-    @Override
-    public void showCountLinChart(final List<String> title, final List<List<Map<Long, String>>> list) {
-        if (list != null) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-//                    etcAdapter = new LineEtcAdapter(mContext, title, list);
-//                    listview_count.setAdapter(etcAdapter);
-                }
-            });
-        }
-    }
-
-    @Override
-    public void showEmpty() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-//                tv_empty.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    @Override
-    public void getTimeSuc(final String lTime) {
-        if (lTime == null) return;
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                if (entityId != null && !entityId.equals("")) {
+//    @Override
+//    public void getTimeSuc(final String lTime) {
+//        if (lTime == null) return;
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                if (entityId != null && !entityId.equals("")) {
 //                    if (lTime != null){
-                    Log.e("lTime", lTime);
+//                    Log.e("lTime", lTime);
 //                        presenter.getDashBoardDetil(entityId,lTime);
 //                    }
-                }
-            }
-        }.start();
-    }
+//                }
+//            }
+//        }.start();
+//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

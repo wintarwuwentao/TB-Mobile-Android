@@ -6,9 +6,6 @@ import com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.l
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.linechart.model.LineChartPort;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.linechart.view.LineChartView;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by Administrator on 2018/7/3 0003.
  */
@@ -24,32 +21,32 @@ public class LineChartPresenter extends BasePresenter implements LineChartListen
     }
 
 
-    public void getDashBoardDetil(String entityId,String lTime) {
-        port.getDashBoardDetil(entityId,lTime,this);
-    }
+//    public void getDashBoardDetil(String entityId,String lTime) {
+//        port.getDashBoardDetil(entityId,lTime,this);
+//    }
+//
+//
+//    @Override
+//    public void getEtcSuc(List<String> title,List<List<Map<Long, String>>> data) {
+//        view.showEtcLinChart(title,data);
+//    }
+//
+//    @Override
+//    public void getCountSuc(List<String> title, List<List<Map<Long, String>>> listList) {
+//        view.showCountLinChart(title,listList);
+//    }
+//
+//    @Override
+//    public void getDashBoardDetilFail() {
+//        view.showEmpty();
+//    }
 
+//    @Override
+//    public void getTime(String lTime) {
+//        view.getTimeSuc(lTime);
+//    }
 
-    @Override
-    public void getEtcSuc(List<String> title,List<List<Map<Long, String>>> data) {
-        view.showEtcLinChart(title,data);
-    }
-
-    @Override
-    public void getCountSuc(List<String> title, List<List<Map<Long, String>>> listList) {
-        view.showCountLinChart(title,listList);
-    }
-
-    @Override
-    public void getDashBoardDetilFail() {
-        view.showEmpty();
-    }
-
-    @Override
-    public void getTime(String lTime) {
-        view.getTimeSuc(lTime);
-    }
-
-    public void getTime() {
-        port.getTime(this);
-    }
+//    public void getTime() {
+//        port.getTime(this);
+//    }
 }
