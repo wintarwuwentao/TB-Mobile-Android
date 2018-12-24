@@ -11,8 +11,8 @@ import com.device.limaiyun.thingsboard.bean.DecodeTokenBean;
 import com.device.limaiyun.thingsboard.bean.TokenBean;
 import com.device.limaiyun.thingsboard.bean.WantedBean;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.Supervision.view.SupervisionActivity;
+import com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.linechart.view.LineChartActivity;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.alarm.view.AlarmActivity;
-import com.device.limaiyun.thingsboard.ui.activity.childactivity.data.view.DataActivity;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.equipment.view.EquipmentActivity;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.newmessage.view.NewMessageActivity;
 import com.device.limaiyun.thingsboard.ui.activity.childactivity.video.view.VideoActivity;
@@ -126,7 +126,7 @@ public class HomeFragment extends BaseFragment implements HomeView{
 
     @OnClick(R.id.rl_data_msg)
     public void showDataMsg(){
-        Intent intent = new Intent(getContext(),DataActivity.class);
+        Intent intent = new Intent(getContext(),LineChartActivity.class);
         intent.putExtra("scopes",decodeTokenBean.getScopes().get(0));
         intent.putExtra("customerId",decodeTokenBean.getCustomerId());
         startActivity(intent);

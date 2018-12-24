@@ -1,9 +1,11 @@
 package com.device.limaiyun.thingsboard.ui.activity.childactivity.ThirdActivity.linechart.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -54,7 +56,8 @@ public class LineChartActivity extends BaseActivity {
     ProgressBar webview_bar;
     private String username;
     private String password;
-
+    private String scopes;
+    private String customerId;
 
     @Override
     protected int getLayout() {
@@ -74,6 +77,10 @@ public class LineChartActivity extends BaseActivity {
 //        if (name != null) {
 //            tv_title.setText(name);
 //        }
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        scopes = extras.getString("scopes");
+        customerId = extras.getString("customerId");
         mContext = this;
     }
 
@@ -91,6 +98,7 @@ public class LineChartActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                Log.e("urlurlurl", url);
                 if (webview_bar != null)
                     webview_bar.setVisibility(View.GONE);
 //                String postData = null;
@@ -158,18 +166,20 @@ public class LineChartActivity extends BaseActivity {
 //            strJS =String.format("javascript:document.getElementsByTagName('md-input-container')[0].className = 'md-block md-icon-left md-tb-dark-theme md-input-has-value md-input-focused';document.getElementById('username-input').value = '343152747@qq.com';document.getElementsByTagName('md-input-container')[0].className = 'md-block md-icon-left md-tb-dark-theme md-input-has-value';document.getElementsByTagName('md-input-container')[1].className = 'md-block md-icon-left md-tb-dark-theme md-input-has-value md-input-focused';document.getElementById('password-input').value = '123456';document.getElementsByTagName('md-input-container')[1].className = 'md-block md-icon-left md-tb-dark-theme md-input-has-value';document.getElementsByTagName('button')[0].click();");
 // strJS = "$('#usernamae-input').val('qiyue@limaicloud.com').trigger('input');$('#password-input').val('123456').trigger('input');";
 //        strJS = String.format("javascript:document.getElementByName('username-input').value = 'qiyue@limaicloud.com';angular.element($('#username-input')).triggerHandler('change');angular.element($('#password-input')).triggerHandler('focus');document.getElementByName('password-input').value = '123456';angular.element($('#password-input')).triggerHandler('change');document.getElementsByTagName('button')[0].click();");
-        strJS = String.format("javascript:var username = document.getElementById('username-input');\n" +
-                "username.value = '" + username + "';\n" +
-                "username.dispatchEvent(new Event('input'));\n" +
-                "var password = document.getElementById('password-input');\n" +
-                "password.value = '" + password + "';\n" +
-                "password.dispatchEvent(new Event('input'));\n" +
-                "document.getElementsByTagName('button')[0].click();\n");
+        if (!username.equals("") && !password.equals(""))
+            strJS = String.format("javascript:var username = document.getElementById('username-input');\n" +
+                    "username.value = '" + username + "';\n" +
+                    "username.dispatchEvent(new Event('input'));\n" +
+                    "var password = document.getElementById('password-input');\n" +
+                    "password.value = '" + password + "';\n" +
+                    "password.dispatchEvent(new Event('input'));\n" +
+                    "document.getElementsByTagName('button')[0].click();\n");
         Log.e("strJs", strJS);
         view.evaluateJavascript(strJS, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
-                linechart_webview.loadUrl(Constant.API_SERVE_URL + Constant.API_DASHBOARD);
+//                linechart_webview.loadUrl(Constant.API_SERVE_URL + Constant.API_DASHBOARD);
+//                linechart_webview.loadUrl(Constant.API_SERVE_URL);
             }
         });
     }
@@ -213,10 +223,12 @@ public class LineChartActivity extends BaseActivity {
             WebBackForwardList webBackForwardList = linechart_webview.copyBackForwardList();
             if (webBackForwardList.getCurrentIndex() > 1) {
                 String historyUrl = webBackForwardList.getItemAtIndex(webBackForwardList.getCurrentIndex() - 1).getUrl();
-                if (!historyUrl.equals(Constant.API_SERVE_URL)) {
+                if (!historyUrl.equals(Constant.API_SERVE_URL + "")) {
                     linechart_webview.goBack();
+                } else {
+                    finish();
                 }
-            } else {
+            }else {
                 finish();
             }
         }
@@ -298,16 +310,14 @@ public class LineChartActivity extends BaseActivity {
                 WebBackForwardList webBackForwardList = linechart_webview.copyBackForwardList();
                 if (webBackForwardList.getCurrentIndex() > 1) {
                     String historyUrl = webBackForwardList.getItemAtIndex(webBackForwardList.getCurrentIndex() - 1).getUrl();
-                    if (!historyUrl.equals(Constant.SERVER_URL_STR)) {
+                    if (!historyUrl.equals(Constant.SERVER_URL_STR + "/login")) {
                         linechart_webview.goBack();
                         return true;
+                    } else {
+                        finish();
+                        return true;
                     }
-                } else {
-                    finish();
-                    return true;
                 }
-            } else {
-                return true;
             }
         }
         return super.onKeyDown(keyCode, event);

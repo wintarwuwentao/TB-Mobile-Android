@@ -10,28 +10,11 @@
 
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/rl_oa"
-            android:layout_width="160dp"
-            android:layout_height="75dp"
-            android:background="@mipmap/oa_bg_blue" />
-
-        <RelativeLayout
-            android:id="@+id/rl_video"
-            android:layout_width="160dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="14.5dp"
-            android:background="@mipmap/video_monitor" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
-
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_oa"-->
+        <!--android:layout_width="160dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:background="@mipmap/oa_bg_blue" />-->
         <RelativeLayout
             android:id="@+id/rl_supervision"
             android:layout_width="160dp"
@@ -68,6 +51,64 @@
                 android:src="@mipmap/sup_icon" />
         </RelativeLayout>
 
+
+        <RelativeLayout
+            android:id="@+id/rl_video"
+            android:layout_width="160dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="14.5dp"
+            android:background="@mipmap/video_monitor" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_supervision"-->
+        <!--android:layout_width="160dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:background="@drawable/oa_bg">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_marginLeft="7dp"-->
+        <!--android:text="@string/supervision"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="16sp" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="7dp"-->
+        <!--android:layout_marginLeft="7dp"-->
+        <!--android:text="@string/easy_sup"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="12sp" />-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:src="@mipmap/sup_icon" />-->
+        <!--</RelativeLayout>-->
+        <RelativeLayout
+            android:id="@+id/rl_oa"
+            android:layout_width="160dp"
+            android:layout_height="75dp"
+            android:background="@mipmap/oa_bg_blue" />
+
         <RelativeLayout
             android:layout_width="160dp"
             android:layout_height="75dp"
@@ -103,7 +144,6 @@
                 android:src="@mipmap/erp_iv" />
         </RelativeLayout>
     </LinearLayout>
-
 
 
     <LinearLayout

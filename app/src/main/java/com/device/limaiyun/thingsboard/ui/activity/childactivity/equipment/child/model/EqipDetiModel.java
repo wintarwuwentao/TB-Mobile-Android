@@ -48,7 +48,7 @@ public class EqipDetiModel implements EqipDetiPort {
                     try {
                         jsonObject1.put("entityType", "DEVICE");
                         jsonObject1.put("entityId", entityId);
-                        jsonObject1.put("scope", "LATEST_TELEMETRY");
+                        jsonObject1.put("scope", "10");
                         jsonObject1.put("cmdId", 2);
                         jsonArray1.put(jsonObject1);
                     } catch (JSONException e) {
@@ -58,17 +58,17 @@ public class EqipDetiModel implements EqipDetiPort {
                     JSONArray jsonArray2 = new JSONArray();
 
                     //attrSubCmds组
-                    JSONObject jsonObject3 = new JSONObject();
+//                    JSONObject jsonObject3 = new JSONObject();
                     JSONArray jsonArray3 = new JSONArray();
-                    try {
-                        jsonObject3.put("entityType", "DEVICE");
-                        jsonObject3.put("entityId", entityId);
-                        jsonObject3.put("scope", "CLIENT_SCOPE");
-                        jsonObject3.put("cmdId", 1);
-                        jsonArray3.put(jsonObject3);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        jsonObject3.put("entityType", "DEVICE");
+//                        jsonObject3.put("entityId", entityId);
+//                        jsonObject3.put("scope", "CLIENT_SCOPE");
+//                        jsonObject3.put("cmdId", 1);
+//                        jsonArray3.put(jsonObject3);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
                     JSONObject jsonObject = new JSONObject();
                     try {
                         jsonObject.put("tsSubCmds", jsonArray1);
@@ -112,6 +112,7 @@ public class EqipDetiModel implements EqipDetiPort {
                         dataBean.setKey(key_list);
                         ArrayList<String> title = new ArrayList<>();
                         dataBean.setTitle(title);
+                        int flag = 0;
                         while (iterator.hasNext()) {
                             String key = iterator.next();
                             title.add(key);
@@ -128,9 +129,10 @@ public class EqipDetiModel implements EqipDetiPort {
                                 map.put(time, number);
                                 list_map.add(map);
                                 key_list.add(list_map);
-                                dataBean.getKey().set(i, list_map);
+                                dataBean.getKey().set(flag, list_map);
 //                                dataBean.getKey().get(i).add(map);
                             }
+                            flag++;
                         }
                         listener.getNewDetilOnSuc(detialBean);
                         client.close();

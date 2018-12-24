@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private LoginPresenter mLoginPresenter;
     private String username;
     private String password;
-//    private String base_url;
+    //    private String base_url;
     @BindView(R.id.checkbox)
     CheckBox checkBox;
     private boolean cb_boolean;
@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if (bundle != null){
+        if (bundle != null) {
             exit_app = bundle.getBoolean("exit_app");
         }
         SharedPreferences account = getSharedPreferences("account", MODE_PRIVATE);
@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 //        SharedPreferences url = getSharedPreferences("login", MODE_PRIVATE);
 //        Configs.BASE_URL = url.getString("url", Constant.SERVE_URL);
 
-        if (exit_app == false){
+        if (exit_app == false) {
             autoLogin();
         }
     }
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         //特定客户的用户名密码
         etUsername.setText(R.string.username);
         etPassword.setText(R.string.password);
-
+//        checkBox.setChecked(true);
         mLoginPresenter = new LoginPresenter(this);
 //        SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit = sp.edit();
@@ -173,7 +173,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @OnClick(R.id.btn_login)
     public void Login(View view) {
+        SharedPreferences sp = getSharedPreferences("account", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("username", etUsername.getText().toString());
+        edit.putString("password", etPassword.getText().toString());
+        edit.commit();
         mLoginPresenter.login();
+
     }
 
 
